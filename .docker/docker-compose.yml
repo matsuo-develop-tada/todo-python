@@ -1,0 +1,46 @@
+version: "3"
+services:
+  # アプリケーション
+  application:
+    image: python3:app
+    container_name: python3_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../:/var/www/html
+    ports:
+      - "8080:80"
+      - "443:443"
+      - "22:22"
+      - "8000:8000"
+      - "5000:5000"
+    tty: true
+    privileged: true
+    restart: always
+    networks:
+      - app-tier
+
+  # データベース
+  database:
+    image: python3:db
+    container_name: python3_db
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_database
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
+    privileged: true
+    restart: always
+    networks:
+      - app-tier
+
+# ネットワーク
+networks:
+  app-tier:
+    driver: bridge
