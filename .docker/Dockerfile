@@ -31,8 +31,10 @@ RUN LD_RUN_PATH=/usr/local/lib ./configure
 RUN LD_RUN_PATH=/usr/local/lib make
 RUN LD_RUN_PATH=/usr/local/lib make install
 # python3をpythonコマンドで使用できるように
-RUN mv /usr/bin/python /usr/bin/python.bk
-RUN ln -s /usr/local/bin/python3 /usr/local/bin/python
+# yumが動かなかったのでコメントアウト
+# python3コマンドで実行
+# RUN mv /usr/bin/python /usr/bin/python.bk
+# RUN ln -s /usr/local/bin/python3 /usr/local/bin/python
 
 RUN pip3 install readline
 RUN pip3 install virtualenv
@@ -63,7 +65,7 @@ WORKDIR /var/www/html
 
 ENV TZ Asia/Tokyo
 
-CMD ["/bin/bash"]
+CMD ["/sbin/init"]
 
 EXPOSE 80
 EXPOSE 443
