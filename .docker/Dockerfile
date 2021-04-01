@@ -58,6 +58,9 @@ RUN pip3 install python-decouple
 RUN pip3 install dj-database-url
 RUN pip3 install dj_static
 
+# 環境変数を読み込むライブラリ
+RUN pip3 install python-dotenv
+
 # 自動フォーマットライブラリ
 RUN pip3 install autopep8
 
