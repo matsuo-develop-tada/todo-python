@@ -33,6 +33,9 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(500))
 
+    def __init__(self, content):
+        self.content = content
+
 db.create_all()
 
 @app.route('/todos', methods=['GET'])
@@ -49,6 +52,6 @@ def get_todos():
         dict_todos.append(dict_todo)
     return jsonify(dict_todos)
 
-
+# Flask起動
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
