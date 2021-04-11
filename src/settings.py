@@ -5,12 +5,8 @@ from os import getenv
 from os.path import join, dirname
 from dotenv import load_dotenv
 
-# 環境変数をどのファイルから読み込むかを設定
-load_dotenv(verbose=True)
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
-
 # 環境変数の取得
+load_dotenv(verbose=True)
 dialect = getenv('DIALECT')
 driver = getenv('DRIVER')
 db_user = getenv('DB_USER')
