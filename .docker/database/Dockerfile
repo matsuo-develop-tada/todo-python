@@ -1,4 +1,4 @@
-FROM mysql:latest
+FROM mysql:8
 
 RUN apt-get update
 RUN apt-get install -y vim
