@@ -38,6 +38,12 @@ class Todo(db.Model):
     dt_create = db.Column(db.DateTime, default=datetime.utcnow)
     dt_update = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
+    def __init__(self, content, color_code, checked, dt_do):
+        self.content = content
+        self.color_code = color_code
+        self.checked = checked
+        self.dt_do = dt_do
+
     # dictに変換
     def to_dict(self):
         return {
@@ -50,11 +56,22 @@ class Todo(db.Model):
             'dt_update': format_date(self.dt_update)
         }
 
-    def __init__(self, content, color_code, checked, dt_do):
-        self.content = content
+
+# Colorモデル
+class Color(db.Model):
+    __tablename__ = 'color'
+
+    id_color = db.Column(db.Integer, primary_key=True)
+    color_code = db.Column(db.String(10))
+
+    def __init__(self, color_code):
         self.color_code = color_code
-        self.checked = checked
-        self.dt_do = dt_do
+
+    def to_dict(self):
+        return {
+            'id_color': self.id_color,
+            'color_code': self.color_code
+        }
 
 
 # datetimeを「%Y-%m-%d %H:%M:%S」形式に変換するメソッド
