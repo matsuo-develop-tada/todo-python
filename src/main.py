@@ -1,5 +1,5 @@
 from flask import jsonify
-from settings import app, Todo
+from settings import app, Todo, Color
 
 
 @app.route('/todos', methods=['GET'])
@@ -13,6 +13,17 @@ def get_todos():
         dict_todos.append(todo.to_dict())
 
     return jsonify(dict_todos)
+
+
+@app.route('/colors', methods=['GET'])
+def get_colors():
+    colors = Color.query.all()
+
+    dict_colors = []
+    for color in colors:
+        dict_colors.append(color.to_dict())
+
+    return jsonify(dict_colors)
 
 
 # Flask起動
