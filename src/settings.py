@@ -1,8 +1,7 @@
 from datetime import datetime
-from flask import Flask, jsonify
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import getenv
-from os.path import join, dirname
 from dotenv import load_dotenv
 
 # 環境変数の取得
