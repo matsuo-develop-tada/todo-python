@@ -47,6 +47,7 @@ RUN pip3 install sqlalchemy
 RUN pip3 install pymysql
 RUN pip3 install flask-sqlalchemy
 RUN pip3 install flask-migrate
+RUN pip3 install cryptography
 
 # Django
 RUN pip3 install Django==3.1.2

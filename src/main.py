@@ -1,11 +1,18 @@
-from flask import jsonify
+from flask import jsonify, request
 from settings import app, Todo, Color
 
 
 @app.route('/todos', methods=['GET'])
 def get_todos():
-    # Todo一覧を取得
-    todos = Todo.query.all()
+    color_code = request.args.get('color_code')
+    dt_do = request.args.get('dt_do')
+
+    query = Todo.query
+    if color_code:
+        query = query.filter(Todo.color_code == color_code)
+    if dt_do:
+        query = query.filter(Todo.dt_do == dt_do)
+    todos = query.all()
 
     # Todo一覧を取得した後に、class→dict→jsonの順に変換して返す
     dict_todos = []
