@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from settings import app, Todo, Color
+from settings import app, db, Todo, Color
 
 
 @app.route('/todos', methods=['GET'])
@@ -31,6 +31,27 @@ def get_colors():
         dict_colors.append(color.to_dict())
 
     return jsonify(dict_colors)
+
+
+@app.route('/regist', methods=['POST'])
+def regist_todo():
+    # vueから渡ってきたデータを取得する
+    content = request.json["content"]
+    deadline = request.json["deadline"]
+    color_code = request.json["colorCode"]
+
+    # それぞれのパラメータを渡してtodoをインスタンス化する
+    todo = Todo(content, color_code, False, deadline)
+
+    db.session.add(todo)
+    db.session.commit()
+
+    result = True
+
+
+
+    # 登録の成功・失敗をBooleanで返す
+    return jsonify(result)
 
 
 # Flask起動
