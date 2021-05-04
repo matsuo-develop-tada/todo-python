@@ -35,23 +35,19 @@ def get_colors():
 
 @app.route('/regist', methods=['POST'])
 def regist_todo():
-    # vueから渡ってきたデータを取得する
+     # vueから渡ってきたデータを取得する
     content = request.json["content"]
     deadline = request.json["deadline"]
     color_code = request.json["colorCode"]
 
-    # それぞれのパラメータを渡してtodoをインスタンス化する
+        # それぞれのパラメータを渡してtodoをインスタンス化する
     todo = Todo(content, color_code, False, deadline)
 
     db.session.add(todo)
     db.session.commit()
-
     result = True
 
-
-
-    # 登録の成功・失敗をBooleanで返す
-    return jsonify(result)
+    return "hello"
 
 
 # Flask起動
