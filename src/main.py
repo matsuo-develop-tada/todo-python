@@ -37,15 +37,14 @@ def get_colors():
 def regist_todo():
      # vueから渡ってきたデータを取得する
     content = request.json["content"]
-    deadline = request.json["deadline"]
-    color_code = request.json["colorCode"]
+    deadline = request.json["dt_do"]
+    color_code = request.json["color_code"]
 
-        # それぞれのパラメータを渡してtodoをインスタンス化する
+    # それぞれのパラメータを渡してtodoをインスタンス化する
     todo = Todo(content, color_code, False, deadline)
 
     db.session.add(todo)
     db.session.commit()
-    result = True
 
     return "hello"
 
