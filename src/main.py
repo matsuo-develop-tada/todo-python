@@ -33,7 +33,7 @@ def get_colors():
     return jsonify(dict_colors)
 
 
-@app.route('/regist', methods=['POST'])
+@app.route('/todos', methods=['POST'])
 def regist_todo():
      # vueから渡ってきたデータを取得する
     content = request.json["content"]
