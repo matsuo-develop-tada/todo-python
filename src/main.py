@@ -46,7 +46,7 @@ def regist_todo():
     db.session.add(todo)
     db.session.commit()
 
-    return ""
+    return jsonify(todo.to_dict())
 
 @app.route('/delTodos', methods=['POST'])
 def del_todos():
@@ -58,7 +58,7 @@ def del_todos():
         db.session.delete(delTodo)
     db.session.commit()
 
-    return ""
+    return {}
 
 # Flask起動
 if __name__ == '__main__':
