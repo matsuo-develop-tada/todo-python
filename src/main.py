@@ -46,7 +46,7 @@ def regist_todo():
     db.session.add(todo)
     db.session.commit()
 
-    return "hello"
+    return ""
 
 @app.route('/delTodos', methods=['POST'])
 def del_todos():
