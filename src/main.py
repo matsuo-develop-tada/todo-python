@@ -33,7 +33,7 @@ def get_colors():
     return jsonify(dict_colors)
 
 
-@app.route('/regist', methods=['POST'])
+@app.route('/todos', methods=['POST'])
 def regist_todo():
      # vueから渡ってきたデータを取得する
     content = request.json["content"]
@@ -48,6 +48,17 @@ def regist_todo():
 
     return "hello"
 
+@app.route('/delTodos', methods=['POST'])
+def del_todos():
+    # vue側からもらった削除するtodoのidを取得する
+    delTodoIds = request.json
+    # 画面からもらったtodo_idを参考にしてDBのデータを削除する
+    for delTodoId in delTodoIds:
+        delTodo = db.session.query(Todo).filter(Todo.id_todo == delTodoId).one()
+        db.session.delete(delTodo)
+    db.session.commit()
+
+    return ""
 
 # Flask起動
 if __name__ == '__main__':
