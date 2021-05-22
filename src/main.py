@@ -58,7 +58,7 @@ def del_todos():
         db.session.delete(delTodo)
     db.session.commit()
 
-    return ""
+    return "削除が完了しました"
 
 # Flask起動
 if __name__ == '__main__':
