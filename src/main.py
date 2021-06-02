@@ -60,6 +60,27 @@ def del_todos():
 
     return {}
 
+@app.route('/getSingleTodo', methods=['GET'])
+def get_single_todo():
+    updateTodoId = request.args.get('id_todo')
+    upDateTodo = db.session.query(Todo).filter(Todo.id_todo == updateTodoId).one()
+
+    return jsonify(upDateTodo.to_dict())
+
+@app.route('/updateTodo', methods=['POST'])
+def update_todo():
+    # フロント側から送られてきたオブジェクトからidを取得する
+    updateTodoId = request.json['id_todo']
+    updateTodo = db.session.query(Todo).filter(Todo.id_todo == updateTodoId).one()
+
+    # 更新処理を行う内容を取得、代入
+    updateTodo.content = request.json['content']
+    updateTodo.color_code = request.json['color_code']
+    updateTodo.dt_do = request.json['dt_do']
+
+    db.session.commit()
+
+    return {}
 # Flask起動
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
