@@ -62,6 +62,7 @@ def del_todos():
 
 @app.route('/getSingleTodo', methods=['GET'])
 def get_single_todo():
+    # 更新する対象のデータを取得
     updateTodoId = request.args.get('id_todo')
     upDateTodo = db.session.query(Todo).filter(Todo.id_todo == updateTodoId).one()
 
