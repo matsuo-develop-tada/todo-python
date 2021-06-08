@@ -62,7 +62,6 @@ def del_todos():
 
 @app.route('/getSingleTodo', methods=['GET'])
 def get_single_todo():
-    # 更新する対象のデータを取得
     updateTodoId = request.args.get('id_todo')
     upDateTodo = db.session.query(Todo).filter(Todo.id_todo == updateTodoId).one()
 
@@ -82,6 +81,20 @@ def update_todo():
     db.session.commit()
 
     return {}
+
+@app.route('/updateCheckFlg', methods=['POST'])
+def update_checkFlg():
+    # フロントのチェックボックスにチェックがつけられたタスクのidを取得する
+    updateCheckFlgId = request.args.get('id_todo')
+    updateTodo = db.session.query(Todo).filter(Todo.id_todo == updateCheckFlgId).one()
+
+    # チェックフラグを反転させる
+    updateTodo.checked = not updateTodo.checked
+    db.session.commit()
+
+    return {}
+
+
 # Flask起動
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
